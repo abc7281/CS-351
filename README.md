@@ -1,6 +1,6 @@
 # CS-351 Project-1: Performance Evaluation Report
 
-This report details the performance evaluation of five different implementations for computing 1,000,000 hashes using two sets of compiler options: a non-optimized build (default, debug build with `-g`) and an optimized build (`-O2`). Each implementation reads input data in a different manner, and the goal is to measure improvements and analyze where processing time and resource usage are spent.
+Here lies the performance evaluation of the five implementations for computing 1,000,000 hashes using two compiler options: a non-optimized default build (`-g`) and an optimized build (`-O2`).
 
 ---
 
@@ -18,8 +18,8 @@ The following timings were recorded using the command:
 | hash-04  | -g           | 14.35         | 13.78         | 0.46         | 5011784     | 1,000,000 / 14.35 ≈ 69720 | 337.20 / 14.35 ≈ 23.50 |
 
 *Notes:*  
-- The baseline is **hash-00**, which reads the text file one value at a time and takes significantly longer.  
-- The improvements for the other programs are calculated as:  
+- The baseline is **hash-00**, which reads the text file one value at a time and takes a very very long time.
+- The improvements for the other programs are calculated as:
   **Improvement = (hash-00 real time) / (current program real time)**.
 
 ---
@@ -40,8 +40,8 @@ The following timings were recorded:
 | hash-04  | -O2          | 7.13          | 6.60          | 0.45         | 5012352     | 1,000,000 / 7.13 ≈ 140210 | 337.02 / 7.13 ≈ 47.3   |
 
 *Notes:*  
-- The optimized builds of hash-01, hash-02, hash-03, and hash-04 show dramatic performance improvements compared to the baseline hash-00, which appears unchanged.
-- The improvements for hash-04, for instance, suggest that while it benefits from optimization, its very high memory usage remains as a result of memory mapping.
+- The optimized builds of hash-01, hash-02, hash-03, and hash-04 show dramatic performance improvements compared to the baseline hash-00, which is almost unchanged.
+- The improvements for hash-04 suggest that while it benefits from optimization, its high memory usage remains as a result of memory mapping.
 
 ---
 

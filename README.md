@@ -9,9 +9,8 @@ This report details the performance evaluation of five different implementations
 The following timings were recorded using the command:
 /usr/bin/time -f "%e real\t%U user\t%S sys\t%M memory (KB)" ./hash-0X
 
-
 | Program  | Optimization | Real Time (s) | User Time (s) | Sys Time (s) | Memory (KB) | Throughput (hashes/s)     | Improvement vs hash-00 |
-|----------|--------------|---------------|---------------|--------------|-----------------------------------------|------------------------|
+|----------|--------------|---------------|---------------|--------------|-------------|---------------------------|------------------------|
 | hash-00  | -g           | 337.20        | 330.51        | 4.60         | 2892        | 1,000,000 / 337.20 ≈ 2964 | 1.00                   |
 | hash-01  | -g           | 17.87         | 16.51         | 1.21         | 2880        | 1,000,000 / 17.87 ≈ 55958 | 337.20 / 17.87 ≈ 18.87 |
 | hash-02  | -g           | 15.61         | 14.32         | 1.17         | 3464        | 1,000,000 / 15.61 ≈ 64063 | 337.20 / 15.61 ≈ 21.60 |

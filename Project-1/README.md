@@ -55,7 +55,7 @@ The hash-00 implementation reads each value from the file individually. Reading 
 
 Both **hash-01** and **hash-02** allocate memory for each hash computation:
 - **hash-01** uses `operator new`.
-- **hash-02** uses `calloc()` which does allocation on the stack versus operator new's allocation in the heap.
+- **hash-02** uses `alloca()` which does allocation on the stack versus operator new's allocation in the heap.
 
 The timing results show that hash-02 is slightly faster (15.61 s vs. 17.87 s in the non-optimized build, and 8.16 s vs. 8.22 s in the optimized build). The difference is not massive, but the consistency in the data still shows that the allocation method in hash-02 offers a small improvement in performance.
 

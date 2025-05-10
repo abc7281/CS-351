@@ -1,4 +1,4 @@
-# CS-351 Project-1: Performance Evaluation Report
+Project-1: Performance Evaluation Report
 
 This report details the performance evaluation of five different implementations for computing 1,000,000 hashes using two sets of compiler options: a non-optimized build (default, debug build with `-g`) and an optimized build (`-O2`). Each implementation reads input data in a different manner, and the goal is to measure improvements and analyze where processing time and resource usage are spent.
 

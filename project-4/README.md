@@ -1,9 +1,16 @@
 # Project 4 – CUDA **iota** & Julia-set Generator  
 
+| File           | Description                                 |
+|---------------:|---------------------------------------------|
+| `iota.cpp`     | CPU version using `std::iota`               |
+| `iota.cu`      | CUDA kernel implementation    |
+| `runTrials.sh` | Script that times `iota.cpp` vs. `iota.cu`  |
+| `julia.cpp`    | CPU Julia/Mandelbrot PPM generator          |
+| `julia.cu`     | CUDA port of Julia-set generator       |
+
 ## iota results & discussion
 
 ### Timing tables  
-(_Generated with `./runTrials.sh` on an RTX A6000 cloud VM._)
 
 #### CPU (`iota.cpu`)
 
@@ -37,8 +44,8 @@
 | 1 000 000 000 | 6.82 | 1.78 | 5.04 |
 | 5 000 000 000 | 48.06 | 9.42 | 38.65 |
 
-**Are the results what I expected?  Why is CUDA a poor fit here?**  
-Yes. Each GPU launch incurs significant latency plus two PCIe transfers; the per-element work is only one addition, so the overhead dominates for small/medium arrays. Only at billions of elements does the GPU approach CPU time, and even there the CPU’s cache-friendly loop remains competitive. CUDA excels when each thread does _lots_ of math—not one integer add.
+**Are the results what you expected? Speculate as to why it looks like CUDA isn’t a great solution for this problem.**  
+Yes. Each GPU launch has a lot of latency and two PCIe transfers. The per-element work is only one addition, so the overhead takes over for small/medium arrays. Only at billions of elements does the GPU approach CPU time, and even there the CPU’s cache-friendly loop is still strong. CUDA excels when each thread does _lots_ of math, not one integer add.
 
 ---
 
@@ -47,46 +54,3 @@ Yes. Each GPU launch incurs significant latency plus two PCIe transfers; the per
 ![Julia set for \(c = 2.1 + 2.1i\)](images/julia.png)
 
 *Figure 1: Julia set rendered by `julia.gpu` with constant \(c = 2.1 + 2.1i\).*
-
-The CUDA kernel (one thread = one pixel):
-
-```cpp
-__global__ void julia(Complex d, Complex center, Color* pixels) {
-    int x = blockIdx.x * blockDim.x + threadIdx.x;
-    int y = blockIdx.y * blockDim.y + threadIdx.y;
-    if (x >= Width || y >= Height) return;
-
-    float real = -center.x + x * d.x;
-    float imag = -center.y + y * d.y;
-    Complex z{ real, imag };
-
-    int iter = 0;
-    while (iter < MaxIterations && magnitude(z) <= 2.0f) {
-        z = z * z + center;
-        ++iter;
-    }
-    pixels[y * Width + x] = setColor(iter);
-}
-```
-
-ll      = (-2.1, -2.1)
-
-ur      = ( 2.1,  2.1)
-
-d       = ((ur.x-ll.x)/Width , (ur.y-ll.y)/Height)  // pixel size
-
-center  = (2.1, 2.1)   // constant  c
-
-block   = (32,32)
-
-grid    = (Width/32 , Height/32)
-
-
-
-iota.cpu	sequential loop filling a vector
-
-iota.gpu	six-line CUDA kernel, one thread per element
-
-julia.cpu	nested loops compute escape count, write PPM
-
-julia.gpu	GPU kernel computes each pixel in parallel

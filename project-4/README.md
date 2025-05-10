@@ -64,6 +64,10 @@ Yes. Each GPU launch incurs significant latency plus two PCIe transfers; the per
 
 ## CUDA Julia-set image
 
+![Julia set for \(c = 2.1 + 2.1i\)](images/julia.png)
+
+*Figure 1: Julia set rendered by `julia.gpu` with constant \(c = 2.1 + 2.1i\).*
+
 The CUDA kernel (one thread = one pixel):
 
 ```cpp

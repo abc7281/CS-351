@@ -1,24 +1,4 @@
 # Project 4 – CUDA **iota** & Julia-set Generator  
-_CS 351 • Spring 2025_
-
----
-
-## Deliverables in this folder
-
-| File / program | What it is |
-|----------------|------------|
-| `iota.cpp` / `iota.cpu` | CPU reference version of `std::iota` |
-| `iota.cu`  / `iota.gpu` | CUDA version with a six-line kernel |
-| `julia.cpp` / `julia.cpu` | CPU Julia-set renderer (PPM out) |
-| `julia.cu`  / `julia.gpu` | CUDA Julia-set renderer |
-| `runTrials.sh` | Script that produced the iota timing tables |
-| `cpu_times.txt`, `gpu_times.txt` | Raw timing logs for iota |
-| `images/julia.ppm` | Image produced by `julia.gpu` (embedded below) |
-| `README.md` | **this** file |
-
-Everything lives inside **Project-4** in my GitHub repo; nothing is submitted on Canvas.
-
----
 
 ## iota results & discussion
 

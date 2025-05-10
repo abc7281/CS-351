@@ -1,3 +1,5 @@
+# Project 3 - WebGL Shapes
+
 triangle – Renders a simple yellow wire-frame triangle with three vertices drawn as a line loop; no fill and no animation.
 
 decagon – Draws a solid yellow regular decagon (10-sided polygon). It uses a triangle-fan with a centre vertex and stays fixed on-screen.
